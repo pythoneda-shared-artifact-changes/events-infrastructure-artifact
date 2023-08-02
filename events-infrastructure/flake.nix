@@ -24,7 +24,7 @@
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
     pythoneda-shared-artifact-changes-events = {
       url =
-        "github:pythoneda-shared-artifact-changes/events-artifact/0.0.1a8?dir=events";
+        "github:pythoneda-shared-artifact-changes/events-artifact/0.0.1a9?dir=events";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pythoneda-shared-pythoneda-banner.follows =
@@ -83,10 +83,9 @@
       let
         org = "pythoneda-shared-artifact-changes";
         repo = "events-infrastructure";
-        version = "0.0.1a1";
-        sha256 = "sha256-uubxzrow++QhfLnPL3TdbZy1tx1u5H91c+FnqgS6MQY=";
+        version = "0.0.1a2";
+        sha256 = "sha256-DIRWPJbazTemDhmopMkL8wBs8LwTGFmEz0wWd56vVsA=";
         pname = "${org}-${repo}";
-        pkgs = import nixos { inherit system; };
         pythonpackage =
           "pythoneda.shared.artifact_changes.events.infrastructure";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
@@ -102,6 +101,7 @@
         nixosVersion = builtins.readFile "${nixos}/.version";
         nixpkgsRelease = "nixos-${nixosVersion}";
         shared = import "${pythoneda-shared-pythoneda-banner}/nix/shared.nix";
+        pkgs = import nixos { inherit system; };
         pythoneda-shared-artifact-changes-events-infrastructure-for = { python
           , pythoneda-shared-artifact-changes-events
           , pythoneda-shared-artifact-changes-shared
