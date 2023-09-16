@@ -26,18 +26,17 @@ homepage = "@homepage@"
 packages = [{include = "@package@"}]
 
 [tool.poetry.dependencies]
-dbus-next = "^@dbusNextVersion@"
-grpcio = "^@grpcioVersion@"
-python = "^@pythonMajorMinorVersion@"
-pythoneda-shared-artifact-changes-events = "^@pythonedaSharedArtifactChangesEventsVersion@"
-pythoneda-shared-artifact-changes-shared = "^@pythonedaSharedArtifactChangesSharedVersion@"
-pythoneda-shared-code-requests-events = "^@pythonedaSharedCodeRequestsEventsVersion@"
-pythoneda-shared-code-requests-shared = "^@pythonedaSharedCodeRequestsSharedVersion@"
-pythoneda-shared-git-shared = "^@pythonedaSharedGitSharedVersion@"
-pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomainVersion@"
-pythoneda-shared-pythoneda-infrastructure = "^@pythonedaSharedPythonedaInfrastructureVersion@"
-requests = "^@requestsVersion@"
-unidiff = "^@unidiffVersion@"
+dbus-next = "^@dbusNext@"
+grpcio = "^@grpcio@"
+python = "^@pythonMajorMinor@"
+pythoneda-shared-artifact-changes-events = "^@pythonedaSharedArtifactChangesEvents@"
+pythoneda-shared-artifact-changes-shared = "^@pythonedaSharedArtifactChangesShared@"
+pythoneda-shared-code-requests-events = "^@pythonedaSharedCodeRequestsEvents@"
+pythoneda-shared-code-requests-shared = "^@pythonedaSharedCodeRequestsShared@"
+pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomain@"
+pythoneda-shared-pythoneda-infrastructure = "^@pythonedaSharedPythonedaInfrastructure@"
+requests = "^@requests@"
+unidiff = "^@unidiff@"
 
 [build-system]
 requires = ["poetry-core"]
