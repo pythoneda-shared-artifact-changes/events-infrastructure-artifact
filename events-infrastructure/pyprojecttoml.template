@@ -27,16 +27,11 @@ packages = [{include = "@package@"}]
 
 [tool.poetry.dependencies]
 dbus-next = "^@dbusNext@"
-grpcio = "^@grpcio@"
 python = "^@pythonMajorMinor@"
 pythoneda-shared-artifact-changes-events = "^@pythonedaSharedArtifactChangesEvents@"
-pythoneda-shared-artifact-changes-shared = "^@pythonedaSharedArtifactChangesShared@"
-pythoneda-shared-code-requests-events = "^@pythonedaSharedCodeRequestsEvents@"
-pythoneda-shared-code-requests-shared = "^@pythonedaSharedCodeRequestsShared@"
+pythoneda-shared-code-requests-jupyterlab = "^@pythonedaSharedCodeRequestsJupyterlab@"
 pythoneda-shared-pythoneda-domain = "^@pythonedaSharedPythonedaDomain@"
 pythoneda-shared-pythoneda-infrastructure = "^@pythonedaSharedPythonedaInfrastructure@"
-requests = "^@requests@"
-unidiff = "^@unidiff@"
 
 [build-system]
 requires = ["poetry-core"]
