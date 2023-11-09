@@ -22,25 +22,14 @@
   inputs = rec {
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
     nixos.url = "github:NixOS/nixpkgs/nixos-23.05";
-    pythoneda-shared-artifact-changes-events = {
+    pythoneda-shared-artifact-events = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
       inputs.pythoneda-shared-pythoneda-banner.follows =
         "pythoneda-shared-pythoneda-banner";
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
-      url =
-        "github:pythoneda-shared-artifact-changes/events-artifact/0.0.4?dir=events";
-    };
-    pythoneda-shared-code-requests-jupyterlab = {
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixos.follows = "nixos";
-      inputs.pythoneda-shared-pythoneda-banner.follows =
-        "pythoneda-shared-pythoneda-banner";
-      inputs.pythoneda-shared-pythoneda-domain.follows =
-        "pythoneda-shared-pythoneda-domain";
-      url =
-        "github:pythoneda-shared-code-requests/jupyterlab-artifact/0.0.2?dir=jupyterlab";
+      url = "github:pythoneda-shared-artifact/events-artifact/0.0.6?dir=events";
     };
     pythoneda-shared-pythoneda-banner = {
       inputs.flake-utils.follows = "flake-utils";
@@ -53,7 +42,7 @@
       inputs.pythoneda-shared-pythoneda-banner.follows =
         "pythoneda-shared-pythoneda-banner";
       url =
-        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.12?dir=domain";
+        "github:pythoneda-shared-pythoneda/domain-artifact/0.0.13?dir=domain";
     };
     pythoneda-shared-pythoneda-infrastructure = {
       inputs.flake-utils.follows = "flake-utils";
@@ -70,16 +59,15 @@
     with inputs;
     flake-utils.lib.eachDefaultSystem (system:
       let
-        org = "pythoneda-shared-artifact-changes";
+        org = "pythoneda-shared-artifact";
         repo = "events-infrastructure";
-        version = "0.0.4";
-        sha256 = "1868ks9pgcrc03x4r4hky9s0zall52lwz9wml516s5awfjcfrk3g";
+        version = "0.0.5";
+        sha256 = "090lbhhbzknyqjsg9ahfbylpgkxh667g8rnc157dngcjxnccfasx";
         pname = "${org}-${repo}";
-        pythonpackage =
-          "pythoneda.shared.artifact_changes.events.infrastructure";
+        pythonpackage = "pythoneda.shared.artifact.events.infrastructure";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
         description =
-          "Shared kernel for pythoneda-shared-artifact-changes/events-infrastructure";
+          "Shared kernel for pythoneda-shared-artifact/events-infrastructure";
         license = pkgs.lib.licenses.gpl3;
         homepage = "https://github.com/${org}/${repo}";
         maintainers = with pkgs.lib.maintainers;
@@ -92,10 +80,8 @@
           builtins.replaceStrings [ "\n" ] [ "" ] "nixos-${nixosVersion}";
         shared = import "${pythoneda-shared-pythoneda-banner}/nix/shared.nix";
         pkgs = import nixos { inherit system; };
-        pythoneda-shared-artifact-changes-events-infrastructure-for = { python
-          , pythoneda-shared-artifact-changes-events
-          , pythoneda-shared-code-requests-jupyterlab
-          , pythoneda-shared-pythoneda-domain
+        pythoneda-shared-artifact-events-infrastructure-for = { python
+          , pythoneda-shared-artifact-events, pythoneda-shared-pythoneda-domain
           , pythoneda-shared-pythoneda-infrastructure }:
           let
             pnameWithUnderscores =
@@ -117,10 +103,8 @@
               inherit homepage package pname pythonpackage version;
               pythonMajorMinor = pythonMajorMinorVersion;
               dbusNext = python.pkgs.dbus-next.version;
-              pythonedaSharedArtifactChangesEvents =
-                pythoneda-shared-artifact-changes-events.version;
-              pythonedaSharedCodeRequestsJupyterlab =
-                pythoneda-shared-code-requests-jupyterlab.version;
+              pythonedaSharedArtifactEvents =
+                pythoneda-shared-artifact-events.version;
               pythonedaSharedPythonedaDomain =
                 pythoneda-shared-pythoneda-domain.version;
               pythonedaSharedPythonedaInfrastructure =
@@ -138,8 +122,7 @@
             nativeBuildInputs = with python.pkgs; [ pip pkgs.jq poetry-core ];
             propagatedBuildInputs = with python.pkgs; [
               dbus-next
-              pythoneda-shared-artifact-changes-events
-              pythoneda-shared-code-requests-jupyterlab
+              pythoneda-shared-artifact-events
               pythoneda-shared-pythoneda-domain
               pythoneda-shared-pythoneda-infrastructure
             ];
@@ -173,17 +156,16 @@
       in rec {
         defaultPackage = packages.default;
         devShells = rec {
-          default =
-            pythoneda-shared-artifact-changes-events-infrastructure-default;
-          pythoneda-shared-artifact-changes-events-infrastructure-default =
-            pythoneda-shared-artifact-changes-events-infrastructure-python311;
-          pythoneda-shared-artifact-changes-events-infrastructure-python38 =
+          default = pythoneda-shared-artifact-events-infrastructure-default;
+          pythoneda-shared-artifact-events-infrastructure-default =
+            pythoneda-shared-artifact-events-infrastructure-python311;
+          pythoneda-shared-artifact-events-infrastructure-python38 =
             shared.devShell-for {
               banner = "${
                   pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python38
                 }/bin/banner.sh";
               package =
-                packages.pythoneda-shared-artifact-changes-events-infrastructure-python38;
+                packages.pythoneda-shared-artifact-events-infrastructure-python38;
               python = pkgs.python38;
               pythoneda-shared-pythoneda-banner =
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python38;
@@ -191,13 +173,13 @@
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
               inherit archRole layer nixpkgsRelease org pkgs repo space;
             };
-          pythoneda-shared-artifact-changes-events-infrastructure-python39 =
+          pythoneda-shared-artifact-events-infrastructure-python39 =
             shared.devShell-for {
               banner = "${
                   pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python39
                 }/bin/banner.sh";
               package =
-                packages.pythoneda-shared-artifact-changes-events-infrastructure-python39;
+                packages.pythoneda-shared-artifact-events-infrastructure-python39;
               python = pkgs.python39;
               pythoneda-shared-pythoneda-banner =
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python39;
@@ -205,13 +187,13 @@
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
               inherit archRole layer nixpkgsRelease org pkgs repo space;
             };
-          pythoneda-shared-artifact-changes-events-infrastructure-python310 =
+          pythoneda-shared-artifact-events-infrastructure-python310 =
             shared.devShell-for {
               banner = "${
                   pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python310
                 }/bin/banner.sh";
               package =
-                packages.pythoneda-shared-artifact-changes-events-infrastructure-python310;
+                packages.pythoneda-shared-artifact-events-infrastructure-python310;
               python = pkgs.python310;
               pythoneda-shared-pythoneda-banner =
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python310;
@@ -219,13 +201,13 @@
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
               inherit archRole layer nixpkgsRelease org pkgs repo space;
             };
-          pythoneda-shared-artifact-changes-events-infrastructure-python311 =
+          pythoneda-shared-artifact-events-infrastructure-python311 =
             shared.devShell-for {
               banner = "${
                   pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python311
                 }/bin/banner.sh";
               package =
-                packages.pythoneda-shared-artifact-changes-events-infrastructure-python311;
+                packages.pythoneda-shared-artifact-events-infrastructure-python311;
               python = pkgs.python311;
               pythoneda-shared-pythoneda-banner =
                 pythoneda-shared-pythoneda-banner.packages.${system}.pythoneda-shared-pythoneda-banner-python311;
@@ -235,53 +217,44 @@
             };
         };
         packages = rec {
-          default =
-            pythoneda-shared-artifact-changes-events-infrastructure-default;
-          pythoneda-shared-artifact-changes-events-infrastructure-default =
-            pythoneda-shared-artifact-changes-events-infrastructure-python311;
-          pythoneda-shared-artifact-changes-events-infrastructure-python38 =
-            pythoneda-shared-artifact-changes-events-infrastructure-for {
+          default = pythoneda-shared-artifact-events-infrastructure-default;
+          pythoneda-shared-artifact-events-infrastructure-default =
+            pythoneda-shared-artifact-events-infrastructure-python311;
+          pythoneda-shared-artifact-events-infrastructure-python38 =
+            pythoneda-shared-artifact-events-infrastructure-for {
               python = pkgs.python38;
-              pythoneda-shared-artifact-changes-events =
-                pythoneda-shared-artifact-changes-events.packages.${system}.pythoneda-shared-artifact-changes-events-python38;
-              pythoneda-shared-code-requests-jupyterlab =
-                pythoneda-shared-code-requests-jupyterlab.packages.${system}.pythoneda-shared-code-requests-jupyterlab-python38;
+              pythoneda-shared-artifact-events =
+                pythoneda-shared-artifact-events.packages.${system}.pythoneda-shared-artifact-events-python38;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python38;
               pythoneda-shared-pythoneda-infrastructure =
                 pythoneda-shared-pythoneda-infrastructure.packages.${system}.pythoneda-shared-pythoneda-infrastructure-python38;
             };
-          pythoneda-shared-artifact-changes-events-infrastructure-python39 =
-            pythoneda-shared-artifact-changes-events-infrastructure-for {
+          pythoneda-shared-artifact-events-infrastructure-python39 =
+            pythoneda-shared-artifact-events-infrastructure-for {
               python = pkgs.python39;
-              pythoneda-shared-artifact-changes-events =
-                pythoneda-shared-artifact-changes-events.packages.${system}.pythoneda-shared-artifact-changes-events-python39;
-              pythoneda-shared-code-requests-jupyterlab =
-                pythoneda-shared-code-requests-jupyterlab.packages.${system}.pythoneda-shared-code-requests-jupyterlab-python39;
+              pythoneda-shared-artifact-events =
+                pythoneda-shared-artifact-events.packages.${system}.pythoneda-shared-artifact-events-python39;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python39;
               pythoneda-shared-pythoneda-infrastructure =
                 pythoneda-shared-pythoneda-infrastructure.packages.${system}.pythoneda-shared-pythoneda-infrastructure-python39;
             };
-          pythoneda-shared-artifact-changes-events-infrastructure-python310 =
-            pythoneda-shared-artifact-changes-events-infrastructure-for {
+          pythoneda-shared-artifact-events-infrastructure-python310 =
+            pythoneda-shared-artifact-events-infrastructure-for {
               python = pkgs.python310;
-              pythoneda-shared-artifact-changes-events =
-                pythoneda-shared-artifact-changes-events.packages.${system}.pythoneda-shared-artifact-changes-events-python310;
-              pythoneda-shared-code-requests-jupyterlab =
-                pythoneda-shared-code-requests-jupyterlab.packages.${system}.pythoneda-shared-code-requests-jupyterlab-python310;
+              pythoneda-shared-artifact-events =
+                pythoneda-shared-artifact-events.packages.${system}.pythoneda-shared-artifact-events-python310;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python310;
               pythoneda-shared-pythoneda-infrastructure =
                 pythoneda-shared-pythoneda-infrastructure.packages.${system}.pythoneda-shared-pythoneda-infrastructure-python310;
             };
-          pythoneda-shared-artifact-changes-events-infrastructure-python311 =
-            pythoneda-shared-artifact-changes-events-infrastructure-for {
+          pythoneda-shared-artifact-events-infrastructure-python311 =
+            pythoneda-shared-artifact-events-infrastructure-for {
               python = pkgs.python311;
-              pythoneda-shared-artifact-changes-events =
-                pythoneda-shared-artifact-changes-events.packages.${system}.pythoneda-shared-artifact-changes-events-python311;
-              pythoneda-shared-code-requests-jupyterlab =
-                pythoneda-shared-code-requests-jupyterlab.packages.${system}.pythoneda-shared-code-requests-jupyterlab-python311;
+              pythoneda-shared-artifact-events =
+                pythoneda-shared-artifact-events.packages.${system}.pythoneda-shared-artifact-events-python311;
               pythoneda-shared-pythoneda-domain =
                 pythoneda-shared-pythoneda-domain.packages.${system}.pythoneda-shared-pythoneda-domain-python311;
               pythoneda-shared-pythoneda-infrastructure =
