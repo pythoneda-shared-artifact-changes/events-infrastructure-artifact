@@ -1,8 +1,8 @@
 # events-infrastructure/pyprojecttoml.template
 #
-# This file is the template for pythoneda-shared-artifact-changes/events-infrastructure's pyproject.toml
+# This file is the template for pythoneda-shared-artifact/events-infrastructure's pyproject.toml
 #
-# Copyright (C) 2023-today rydnr's pythoneda-shared-artifact-changes/events-infrastructure-artifact
+# Copyright (C) 2023-today rydnr's pythoneda-shared-artifact/events-infrastructure-artifact
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
