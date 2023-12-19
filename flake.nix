@@ -50,7 +50,7 @@
         "pythoneda-shared-pythoneda-banner";
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
-      url = "github:pythoneda-shared-pythoneda-def/infrastructure/0.0.14";
+      url = "github:pythoneda-shared-pythoneda-def/infrastructure/0.0.15";
     };
   };
   outputs = inputs:
@@ -59,8 +59,8 @@
       let
         org = "pythoneda-shared-artifact";
         repo = "events-infrastructure";
-        version = "0.0.7";
-        sha256 = "1j0bb7a4bfrlvk20g48lhpranvk3bfhn3pbrq4y4lax9nkgxnrqg";
+        version = "0.0.8";
+        sha256 = "0k167dx3ikv3s49d6v10hqipqypfrqfqc0qqbah742p314fw2hby";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.shared.artifact.events.infrastructure";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
