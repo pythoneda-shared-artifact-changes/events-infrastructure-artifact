@@ -29,12 +29,12 @@
         "pythoneda-shared-pythoneda-banner";
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
-      url = "github:pythoneda-shared-artifact-def/events/0.0.22";
+      url = "github:pythoneda-shared-artifact-def/events/0.0.23";
     };
     pythoneda-shared-pythoneda-banner = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixos.follows = "nixos";
-      url = "github:pythoneda-shared-pythoneda-def/banner/0.0.39";
+      url = "github:pythoneda-shared-pythoneda-def/banner/0.0.40";
     };
     pythoneda-shared-pythoneda-domain = {
       inputs.flake-utils.follows = "flake-utils";
@@ -50,7 +50,7 @@
         "pythoneda-shared-pythoneda-banner";
       inputs.pythoneda-shared-pythoneda-domain.follows =
         "pythoneda-shared-pythoneda-domain";
-      url = "github:pythoneda-shared-pythoneda-def/infrastructure/0.0.15";
+      url = "github:pythoneda-shared-pythoneda-def/infrastructure/0.0.16";
     };
   };
   outputs = inputs:
@@ -59,8 +59,8 @@
       let
         org = "pythoneda-shared-artifact";
         repo = "events-infrastructure";
-        version = "0.0.8";
-        sha256 = "0k167dx3ikv3s49d6v10hqipqypfrqfqc0qqbah742p314fw2hby";
+        version = "0.0.9";
+        sha256 = "0pfh9c8cqckllnar6vvkx4fk4qm3add44npmwcz9ri2qpzas5fx2";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.shared.artifact.events.infrastructure";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
