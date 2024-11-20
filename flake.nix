@@ -105,7 +105,7 @@
                 pythoneda-shared-artifact-events.version;
               pythonedaSharedPythonlangDomain =
                 pythoneda-shared-pythonlang-domain.version;
-              pythonedaSharedInfrastructure =
+              pythonedaSharedPythonlangInfrastructure =
                 pythoneda-shared-pythonlang-infrastructure.version;
               src = pyprojectTomlTemplate;
             };
