@@ -29,7 +29,7 @@
         "pythoneda-shared-pythonlang-banner";
       inputs.pythoneda-shared-pythonlang-domain.follows =
         "pythoneda-shared-pythonlang-domain";
-      url = "github:pythoneda-shared-artifact-def/events/0.0.72";
+      url = "github:pythoneda-shared-artifact-def/events/0.0.73";
     };
     pythoneda-shared-pythonlang-banner = {
       inputs.flake-utils.follows = "flake-utils";
@@ -59,8 +59,8 @@
       let
         org = "pythoneda-shared-artifact";
         repo = "events-infrastructure";
-        version = "0.0.15";
-        sha256 = "097sn1ddalm7x220q6a3wmsfcpxgcnr5zy52awqnan1ib22ygvz8";
+        version = "0.0.16";
+        sha256 = "08b3nfi9saaq7qa3rkam9c8g6cz27g0pwp616zxxlnhjs5jcph49";
         pname = "${org}-${repo}";
         pythonpackage = "pythoneda.shared.artifact.events.infrastructure";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
